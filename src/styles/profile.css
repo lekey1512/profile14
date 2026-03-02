@@ -1,0 +1,860 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Be+Vietnam+Pro:wght@300;400;500&display=swap');
+
+:root {
+  --gold: #c9a96e;
+  --gold-light: #e8d5a3;
+  --pink-main: #e8748a;
+  --pink-light: #f4a0b0;
+  --black: #060606;
+  --dark: #0f0f0f;
+  --card: #131313;
+  --border: rgba(232, 116, 138, 0.16);
+  --text: #f0ebe3;
+  --muted: rgba(240, 235, 227, 0.42);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* NAV */
+.profile-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem 4rem;
+  transition: background 0.4s, backdrop-filter 0.4s;
+  background: rgba(6, 6, 6, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(232, 116, 138, 0.15);
+}
+
+.profile-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  color: var(--pink-main);
+  text-decoration: none;
+  display: flex;
+  align-items: baseline;
+  gap: 0.05em;
+}
+
+.profile-logo span {
+  font-style: italic;
+}
+
+.profile-nav-cities {
+  display: flex;
+  gap: 0.25rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  padding: 0.3rem 0.4rem;
+  border-radius: 2px;
+}
+
+.profile-city-pill {
+  padding: 0.4rem 1.1rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 1px;
+  transition: all 0.25s;
+  background: transparent;
+  border: none;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.profile-city-pill:hover {
+  background: var(--pink-main);
+  color: #fff;
+  font-weight: 500;
+}
+
+.profile-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.profile-nav-phone {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--pink-main);
+  text-decoration: none;
+}
+
+.profile-nav-cta {
+  background: var(--pink-main);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.6rem;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+
+.profile-nav-cta:hover {
+  background: var(--pink-light);
+}
+
+/* HERO SECTION */
+.profile-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  padding-top: 0;
+}
+
+/* Gallery */
+.profile-gallery-wrap {
+  position: relative;
+  overflow: hidden;
+  background: #0d0d0d;
+}
+
+.profile-gallery-slides {
+  display: flex;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+.profile-gallery-slide {
+  min-width: 100%;
+  height: 100vh;
+  background: #181818;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.profile-gallery-slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent 70%, var(--black) 100%), linear-gradient(to top, rgba(8, 8, 8, 0.5) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+/* Gallery nav */
+.profile-gallery-dots {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.6rem;
+  z-index: 10;
+}
+
+.profile-dot {
+  width: 28px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.profile-dot.active {
+  background: var(--pink-main);
+  width: 48px;
+}
+
+.profile-gallery-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(8, 8, 8, 0.6);
+  border: 1px solid var(--border);
+  color: var(--pink-main);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s;
+  font-size: 1rem;
+  backdrop-filter: blur(4px);
+}
+
+.profile-gallery-prev {
+  left: 1.2rem;
+}
+
+.profile-gallery-next {
+  right: 1.2rem;
+}
+
+.profile-gallery-btn:hover {
+  background: var(--pink-main);
+  color: #fff;
+}
+
+.profile-photo-count {
+  position: absolute;
+  top: 6rem;
+  right: 1.5rem;
+  z-index: 10;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+}
+
+/* INFO PANEL */
+.profile-info-panel {
+  padding: 7rem 4rem 4rem 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow-y: auto;
+  position: relative;
+  background: var(--black);
+}
+
+.profile-info-panel::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8rem;
+  bottom: 4rem;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--pink-main), transparent);
+}
+
+.profile-model-tag {
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--pink-main);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.profile-model-tag::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--pink-main);
+}
+
+.profile-model-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.profile-model-name em {
+  font-style: italic;
+  color: var(--pink-main);
+}
+
+.profile-model-age {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--muted);
+  font-weight: 300;
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+}
+
+.profile-model-bio {
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: rgba(240, 235, 227, 0.7);
+  margin-bottom: 2.5rem;
+  max-width: 380px;
+  font-style: italic;
+  border-left: 1px solid var(--border);
+  padding-left: 1.2rem;
+}
+
+/* Stats grid */
+.profile-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 2.5rem;
+}
+
+.profile-stat-cell {
+  background: var(--black);
+  padding: 1.1rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.profile-stat-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.profile-stat-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--text);
+}
+
+.profile-stat-highlight .profile-stat-value {
+  color: var(--gold);
+}
+
+/* Services */
+.profile-services-wrap {
+  margin-bottom: 2.5rem;
+}
+
+.profile-services-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.profile-services-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.profile-service-tag {
+  border: 1px solid var(--border);
+  padding: 0.4rem 1rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: rgba(232, 116, 138, 0.85);
+  transition: all 0.3s;
+}
+
+.profile-service-tag:hover {
+  background: rgba(232, 116, 138, 0.08);
+  border-color: var(--pink-main);
+}
+
+/* CTA Buttons */
+.profile-cta-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.profile-btn-primary {
+  flex: 1;
+  background: var(--pink-main);
+  color: #fff;
+  border: none;
+  padding: 1rem 2rem;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.profile-btn-primary:hover {
+  background: var(--pink-light);
+}
+
+.profile-btn-secondary {
+  flex: 1;
+  background: transparent;
+  color: var(--pink-main);
+  border: 1px solid var(--pink-main);
+  padding: 1rem 2rem;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.profile-btn-secondary:hover {
+  background: rgba(232, 116, 138, 0.08);
+}
+
+/* VIDEO SECTION */
+.profile-section {
+  padding: 7rem 4rem;
+  position: relative;
+  background: var(--black);
+}
+
+.profile-section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+}
+
+.profile-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+}
+
+.profile-section-title em {
+  font-style: italic;
+  color: var(--pink-main);
+}
+
+.profile-section-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, rgba(232, 116, 138, 0.2), transparent);
+}
+
+.profile-video-slider-wrap {
+  position: relative;
+  overflow: hidden;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 4rem;
+}
+
+.profile-video-slider {
+  display: flex;
+  transition: transform 0.7s cubic-bezier(0.77, 0, 0.18, 1);
+  cursor: grab;
+  user-select: none;
+}
+
+.profile-video-slider:active {
+  cursor: grabbing;
+}
+
+.profile-video-slide {
+  min-width: 100%;
+  position: relative;
+  padding: 0 2rem;
+}
+
+.profile-video-placeholder-16-9 {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  border: 1px solid var(--border);
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-video-slide:hover .profile-video-placeholder-16-9 {
+  border-color: var(--pink-main);
+  box-shadow: 0 8px 32px rgba(232, 116, 138, 0.2);
+}
+
+.profile-video-play {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid var(--pink-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pink-main);
+  font-size: 1.4rem;
+  transition: all 0.3s;
+  padding-left: 4px;
+}
+
+.profile-video-slide:hover .profile-video-play {
+  background: var(--pink-main);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.profile-video-label {
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+}
+
+.profile-video-duration {
+  position: absolute;
+  bottom: 1.2rem;
+  right: 3.2rem;
+  font-size: 0.75rem;
+  background: rgba(8, 8, 8, 0.85);
+  padding: 0.4rem 0.8rem;
+  color: rgba(232, 116, 138, 0.9);
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(232, 116, 138, 0.2);
+}
+
+.profile-video-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(8, 8, 8, 0.8);
+  border: 1px solid var(--border);
+  color: var(--pink-main);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s;
+  backdrop-filter: blur(8px);
+}
+
+.profile-video-prev {
+  left: 0;
+}
+
+.profile-video-next {
+  right: 0;
+}
+
+.profile-video-btn:hover {
+  background: var(--pink-main);
+  color: #fff;
+  border-color: var(--pink-main);
+}
+
+.profile-video-dots {
+  position: absolute;
+  bottom: -3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.6rem;
+  z-index: 10;
+}
+
+.profile-video-dot {
+  width: 32px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.profile-video-dot.active {
+  background: var(--pink-main);
+  width: 52px;
+}
+
+.profile-video-count {
+  position: absolute;
+  top: -3.5rem;
+  right: 2rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+}
+
+/* FOOTER */
+.profile-footer {
+  border-top: 1px solid rgba(232, 116, 138, 0.16);
+  padding: 2.5rem 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--black);
+}
+
+.profile-footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--pink-main);
+  letter-spacing: 0.2em;
+}
+
+.profile-footer-logo em {
+  font-style: italic;
+}
+
+.profile-footer-text {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .profile-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-gallery-wrap {
+    height: 60vh;
+    min-height: 400px;
+  }
+
+  .profile-gallery-slide {
+    height: 60vh;
+  }
+
+  .profile-info-panel {
+    padding: 3rem 2rem;
+  }
+
+  .profile-info-panel::before {
+    display: none;
+  }
+
+  .profile-nav {
+    padding: 1.2rem 2rem;
+  }
+
+  .profile-nav-cities {
+    display: none;
+  }
+
+  .profile-nav-phone {
+    display: none;
+  }
+
+  .profile-section {
+    padding: 5rem 2rem;
+  }
+
+  .profile-video-slide {
+    padding: 0 1rem;
+  }
+
+  .profile-video-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .profile-video-duration {
+    bottom: 0.8rem;
+    right: 1.8rem;
+    font-size: 0.65rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .profile-video-count {
+    top: -3rem;
+    right: 1rem;
+    font-size: 0.7rem;
+  }
+
+  .profile-video-play {
+    width: 52px;
+    height: 52px;
+    font-size: 1.2rem;
+  }
+
+  .profile-video-label {
+    font-size: 0.7rem;
+  }
+
+  .profile-more-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+
+  .profile-more-section {
+    padding: 5rem 2rem;
+  }
+}
+
+/* MORE MODELS SECTION */
+.profile-more-section {
+  padding: 7rem 4rem;
+  background: var(--dark);
+  position: relative;
+}
+
+.profile-more-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+}
+
+.profile-more-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-more-card:hover {
+  border-color: var(--pink-main);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(232, 116, 138, 0.15);
+}
+
+.profile-more-img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+}
+
+.profile-more-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(6, 6, 6, 0.85) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.profile-more-vip {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  z-index: 10;
+  background: rgba(232, 116, 138, 0.95);
+  color: #fff;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  border-radius: 1px;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.profile-more-info {
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  flex: 1;
+}
+
+.profile-more-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.profile-more-age {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.profile-more-stats {
+  display: flex;
+  gap: 1.2rem;
+  padding: 0.8rem 0;
+  border-top: 1px solid rgba(232, 116, 138, 0.1);
+  border-bottom: 1px solid rgba(232, 116, 138, 0.1);
+}
+
+.profile-more-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.pms-label {
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.pms-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--gold);
+}
+
+.profile-more-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.profile-more-tag {
+  border: 1px solid rgba(232, 116, 138, 0.3);
+  padding: 0.3rem 0.7rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(232, 116, 138, 0.85);
+}
+
+.profile-more-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.profile-btn-view-all {
+  background: transparent;
+  color: var(--pink-main);
+  border: 1px solid var(--pink-main);
+  padding: 1rem 3rem;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+}
+
+.profile-btn-view-all:hover {
+  background: var(--pink-main);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(232, 116, 138, 0.25);
+}

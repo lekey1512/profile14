@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mai Linh, 22 — LuxDate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a96e;
+    --gold-light: #e8d5a3;
+    --pink-main: #e8748a;
+    --pink-light: #f4a0b0;
+    --black: #060606;
+    --dark: #0f0f0f;
+    --card: #131313;
+    --border: rgba(232,116,138,0.16);
+    --text: #f0ebe3;
+    --muted: rgba(240,235,227,0.42);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: linear-gradient(to bottom, rgba(8,8,8,.95), transparent);
+    backdrop-filter: blur(4px);
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 300; letter-spacing: .2em;
+    color: var(--pink-main); text-decoration: none;
+  }
+  .logo span { font-style: italic; }
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: .78rem; letter-spacing: .18em; text-transform: uppercase;
+    transition: color .3s;
+  }
+  .nav-links a:hover { color: var(--pink-main); }
+  .nav-cta {
+    background: transparent; border: 1px solid var(--pink-main);
+    color: var(--pink-main); padding: .55rem 1.6rem;
+    font-size: .78rem; letter-spacing: .15em; text-transform: uppercase;
+    cursor: pointer; transition: all .3s; font-family: 'DM Sans', sans-serif;
+  }
+  .nav-cta:hover { background: var(--pink-main); color: #fff; }
+
+  /* ── HERO SECTION ── */
+  .hero {
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    padding-top: 0;
+  }
+
+  /* Left: Photo Gallery */
+  .gallery-wrap {
+    position: relative; overflow: hidden; background: #0d0d0d;
+  }
+  .gallery-slides {
+    display: flex; height: 100%;
+    transition: transform .7s cubic-bezier(.77,0,.18,1);
+  }
+  .gallery-slide {
+    min-width: 100%; height: 100vh;
+    background: #181818;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; position: relative;
+  }
+  .gallery-slide img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(.92) contrast(1.05);
+    transition: transform 8s ease;
+  }
+  .gallery-slide:hover img { transform: scale(1.03); }
+
+  /* gradient overlay on photo */
+  .gallery-slide::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to right, transparent 70%, var(--black) 100%),
+                linear-gradient(to top, rgba(8,8,8,.5) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  /* Photo nav dots */
+  .gallery-dots {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; gap: .6rem; z-index: 10;
+  }
+  .dot {
+    width: 28px; height: 2px; background: rgba(255,255,255,.25);
+    cursor: pointer; transition: all .3s;
+  }
+  .dot.active { background: var(--pink-main); width: 48px; }
+
+  .gallery-prev, .gallery-next {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(8,8,8,.6); border: 1px solid var(--border);
+    color: var(--pink-main); width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 10; transition: all .3s; font-size: 1rem;
+    backdrop-filter: blur(4px);
+  }
+  .gallery-prev { left: 1.2rem; }
+  .gallery-next { right: 1.2rem; }
+  .gallery-prev:hover, .gallery-next:hover { background: var(--pink-main); color: #fff; }
+
+  /* photo count */
+  .photo-count {
+    position: absolute; top: 6rem; right: 1.5rem; z-index: 10;
+    font-size: .7rem; letter-spacing: .15em; color: var(--muted);
+  }
+
+  /* ── RIGHT: INFO PANEL ── */
+  .info-panel {
+    padding: 7rem 4rem 4rem 5rem;
+    display: flex; flex-direction: column; gap: 0;
+    overflow-y: auto; position: relative;
+    background: var(--black);
+  }
+
+  /* Decorative line */
+  .info-panel::before {
+    content: ''; position: absolute; left: 0; top: 8rem; bottom: 4rem;
+    width: 1px; background: linear-gradient(to bottom, transparent, var(--pink-main), transparent);
+  }
+
+  .model-tag {
+    font-size: .68rem; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--pink-main); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: .8rem;
+  }
+  .model-tag::before {
+    content: ''; width: 32px; height: 1px; background: var(--pink-main);
+  }
+
+  .model-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 300; line-height: 1;
+    margin-bottom: .3rem;
+  }
+  .model-name em { font-style: italic; color: var(--pink-main); }
+
+  .model-age {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; color: var(--muted); font-weight: 300;
+    margin-bottom: 2rem; letter-spacing: .05em;
+  }
+
+  .model-bio {
+    font-size: .88rem; line-height: 1.8; color: rgba(240,235,227,.7);
+    margin-bottom: 2.5rem; max-width: 380px;
+    font-style: italic;
+    border-left: 1px solid var(--border); padding-left: 1.2rem;
+  }
+
+  /* Stats grid */
+  .stats-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+  .stat-cell {
+    background: var(--black); padding: 1.1rem 1.4rem;
+    display: flex; flex-direction: column; gap: .3rem;
+  }
+  .stat-label {
+    font-size: .62rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .stat-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 400; color: var(--text);
+  }
+  .stat-cell.highlight .stat-value { color: var(--gold); }
+
+  /* Services */
+  .services-wrap { margin-bottom: 2.5rem; }
+  .services-label {
+    font-size: .62rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 1rem;
+  }
+  .services-list { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .service-tag {
+    border: 1px solid var(--border); padding: .4rem 1rem;
+    font-size: .75rem; letter-spacing: .1em; color: rgba(232,116,138,.85);
+    transition: all .3s;
+  }
+  .service-tag:hover { background: rgba(232,116,138,.08); border-color: var(--pink-main); }
+
+  /* CTA Buttons */
+  .cta-row { display: flex; gap: 1rem; }
+  .btn-primary {
+    flex: 1; background: var(--pink-main); color: #fff;
+    border: none; padding: 1rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .78rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
+    cursor: pointer; transition: all .3s;
+  }
+  .btn-primary:hover { background: var(--pink-light); }
+  .btn-secondary {
+    flex: 1; background: transparent; color: var(--pink-main);
+    border: 1px solid var(--pink-main); padding: 1rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .78rem; letter-spacing: .18em; text-transform: uppercase;
+    cursor: pointer; transition: all .3s;
+  }
+  .btn-secondary:hover { background: rgba(232,116,138,.08); }
+
+  /* ── VIDEO SECTION ── */
+  .section {
+    padding: 7rem 4rem;
+    position: relative;
+  }
+  .section-header {
+    display: flex; align-items: baseline; gap: 2rem;
+    margin-bottom: 3.5rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 300;
+  }
+  .section-title em { font-style: italic; color: var(--pink-main); }
+  .section-line {
+    flex: 1; height: 1px;
+    background: linear-gradient(to right, rgba(232,116,138,.2), transparent);
+  }
+
+  .videos-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .video-card {
+    position: relative; overflow: hidden;
+    background: var(--card);
+    aspect-ratio: 9/16;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    transition: border-color .3s;
+  }
+  .video-card:hover { border-color: var(--pink-main); }
+  .video-card.featured {
+    grid-column: span 1; grid-row: span 2;
+    aspect-ratio: unset;
+  }
+  .video-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 1rem;
+    min-height: 220px;
+  }
+  .video-play {
+    width: 56px; height: 56px; border-radius: 50%;
+    border: 1.5px solid var(--pink-main);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--pink-main); font-size: 1.2rem;
+    transition: all .3s;
+  }
+  .video-card:hover .video-play {
+    background: var(--pink-main); color: #fff; transform: scale(1.08);
+  }
+  .video-label {
+    font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .video-duration {
+    position: absolute; bottom: .8rem; right: .8rem;
+    font-size: .68rem; background: rgba(8,8,8,.7);
+    padding: .2rem .5rem; color: rgba(232,116,138,.8);
+    letter-spacing: .05em;
+  }
+
+  /* ── MORE MODELS ── */
+  .more-section {
+    padding: 5rem 4rem 7rem;
+    background: var(--dark);
+  }
+  .models-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--border);
+  }
+  .model-card {
+    background: var(--dark); overflow: hidden;
+    position: relative; cursor: pointer;
+    aspect-ratio: 3/4;
+  }
+  .model-card-img {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #1e1e1e, #111);
+    transition: transform .6s cubic-bezier(.77,0,.18,1);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; color: var(--border);
+  }
+  .model-card:hover .model-card-img { transform: scale(1.06); }
+  .model-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(8,8,8,.9) 0%, transparent 50%);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 1.5rem;
+    opacity: 0; transition: opacity .3s;
+  }
+  .model-card:hover .model-card-overlay { opacity: 1; }
+  .card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 300;
+  }
+  .card-meta {
+    font-size: .72rem; color: var(--pink-main); letter-spacing: .1em;
+    margin-top: .2rem;
+  }
+  .card-btn {
+    margin-top: 1rem; background: transparent;
+    border: 1px solid var(--pink-main); color: var(--pink-main);
+    padding: .45rem 1rem; font-size: .7rem;
+    letter-spacing: .15em; text-transform: uppercase;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: all .3s; width: fit-content;
+  }
+  .card-btn:hover { background: var(--pink-main); color: #fff; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid rgba(232,116,138,.16);
+    padding: 2.5rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--black);
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; color: var(--pink-main); letter-spacing: .2em;
+  }
+  .footer-text { font-size: .72rem; color: var(--muted); letter-spacing: .1em; }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .gallery-wrap { height: 60vh; min-height: 400px; }
+    .gallery-slide { height: 60vh; }
+    .info-panel { padding: 3rem 2rem; }
+    .info-panel::before { display: none; }
+    .videos-grid { grid-template-columns: 1fr 1fr; }
+    .models-grid { grid-template-columns: repeat(2, 1fr); }
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .section { padding: 5rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Lux<span>Date</span></a>
+  <div class="nav-links">
+    <a href="#">Hồ Chí Minh</a>
+    <a href="#">Hà Nội</a>
+    <a href="#">Đà Nẵng</a>
+    <a href="#">Nha Trang</a>
+  </div>
+  <button class="nav-cta">Liên hệ</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+
+  <!-- Gallery -->
+  <div class="gallery-wrap">
+    <div class="gallery-slides" id="gallerySlides">
+      <div class="gallery-slide">
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#1c1510,#0d0d0d);display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:5rem;color:rgba(201,169,110,.12);">01</span>
+        </div>
+      </div>
+      <div class="gallery-slide">
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#10151c,#0d0d0d);display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:5rem;color:rgba(201,169,110,.12);">02</span>
+        </div>
+      </div>
+      <div class="gallery-slide">
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#151c10,#0d0d0d);display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:5rem;color:rgba(201,169,110,.12);">03</span>
+        </div>
+      </div>
+      <div class="gallery-slide">
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#1c1015,#0d0d0d);display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:5rem;color:rgba(201,169,110,.12);">04</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="gallery-prev" onclick="changeSlide(-1)">&#8592;</button>
+    <button class="gallery-next" onclick="changeSlide(1)">&#8594;</button>
+
+    <div class="gallery-dots" id="galleryDots">
+      <div class="dot active" onclick="goSlide(0)"></div>
+      <div class="dot" onclick="goSlide(1)"></div>
+      <div class="dot" onclick="goSlide(2)"></div>
+      <div class="dot" onclick="goSlide(3)"></div>
+    </div>
+
+    <div class="photo-count" id="photoCount">01 / 04</div>
+  </div>
+
+  <!-- Info Panel -->
+  <div class="info-panel">
+    <div class="model-tag">Premium Model · Hồ Chí Minh</div>
+
+    <h1 class="model-name">Mai <em>Linh</em></h1>
+    <p class="model-age">22 tuổi · Quận 1, TP.HCM</p>
+
+    <p class="model-bio">
+      "Bên ngoài ngọt ngào, nhưng bên trong em là một ẩn số. Em thích cùng anh xem phim và đi dạo trên biển lúc hoàng hôn."
+    </p>
+
+    <div class="stats-grid">
+      <div class="stat-cell">
+        <span class="stat-label">Chiều cao</span>
+        <span class="stat-value">162 cm</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-label">Cân nặng</span>
+        <span class="stat-value">52 kg</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-label">Số đo</span>
+        <span class="stat-value">88 – 62 – 90</span>
+      </div>
+      <div class="stat-cell highlight">
+        <span class="stat-label">Giá / buổi</span>
+        <span class="stat-value">16.000.000₫</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-label">Giờ làm việc</span>
+        <span class="stat-value">6PM – 5AM</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-label">Lượt xem</span>
+        <span class="stat-value">185.4k</span>
+      </div>
+    </div>
+
+    <div class="services-wrap">
+      <div class="services-label">Dịch vụ</div>
+      <div class="services-list">
+        <span class="service-tag">Nhiệt tình</span>
+        <span class="service-tag">Chiều chuộng</span>
+        <span class="service-tag">Đi ăn tối</span>
+        <span class="service-tag">Du lịch</span>
+        <span class="service-tag">Sự kiện</span>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <button class="btn-primary">Đặt lịch ngay</button>
+      <button class="btn-secondary">Nhắn tin</button>
+    </div>
+  </div>
+
+</section>
+
+<!-- VIDEOS -->
+<section class="section">
+  <div class="section-header reveal">
+    <h2 class="section-title">Video <em>Giới thiệu</em></h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="videos-grid reveal">
+    <!-- Video 1 -->
+    <div class="video-card featured" style="grid-row:span 2; aspect-ratio: unset; min-height: 460px;">
+      <div class="video-placeholder">
+        <div class="video-play">&#9654;</div>
+        <span class="video-label">Video chính</span>
+      </div>
+      <div class="video-duration">2:34</div>
+    </div>
+
+    <!-- Video 2 -->
+    <div class="video-card">
+      <div class="video-placeholder" style="min-height:200px;">
+        <div class="video-play">&#9654;</div>
+        <span class="video-label">Cuộc sống hàng ngày</span>
+      </div>
+      <div class="video-duration">1:18</div>
+    </div>
+
+    <!-- Video 3 -->
+    <div class="video-card">
+      <div class="video-placeholder" style="min-height:200px;">
+        <div class="video-play">&#9654;</div>
+        <span class="video-label">Buổi tối lãng mạn</span>
+      </div>
+      <div class="video-duration">0:58</div>
+    </div>
+
+    <!-- Video 4 -->
+    <div class="video-card">
+      <div class="video-placeholder" style="min-height:200px;">
+        <div class="video-play">&#9654;</div>
+        <span class="video-label">Vlog du lịch</span>
+      </div>
+      <div class="video-duration">3:12</div>
+    </div>
+
+    <!-- Video 5 -->
+    <div class="video-card">
+      <div class="video-placeholder" style="min-height:200px;">
+        <div class="video-play">&#9654;</div>
+        <span class="video-label">Khoảnh khắc đặc biệt</span>
+      </div>
+      <div class="video-duration">1:45</div>
+    </div>
+  </div>
+</section>
+
+<!-- MORE MODELS -->
+<section class="more-section">
+  <div class="section-header reveal">
+    <h2 class="section-title">Khám phá <em>thêm</em></h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="models-grid reveal">
+    <div class="model-card">
+      <div class="model-card-img">♦</div>
+      <div class="model-card-overlay">
+        <p class="card-name">Thùy Anh</p>
+        <p class="card-meta">24 tuổi · Hà Nội</p>
+        <button class="card-btn" onclick="window.open('landing-page.html','_blank')">Xem hồ sơ</button>
+      </div>
+    </div>
+    <div class="model-card">
+      <div class="model-card-img">♦</div>
+      <div class="model-card-overlay">
+        <p class="card-name">Hà Phương</p>
+        <p class="card-meta">21 tuổi · TP.HCM</p>
+        <button class="card-btn" onclick="window.open('landing-page.html','_blank')">Xem hồ sơ</button>
+      </div>
+    </div>
+    <div class="model-card">
+      <div class="model-card-img">♦</div>
+      <div class="model-card-overlay">
+        <p class="card-name">Bảo Châu</p>
+        <p class="card-meta">23 tuổi · Đà Nẵng</p>
+        <button class="card-btn" onclick="window.open('landing-page.html','_blank')">Xem hồ sơ</button>
+      </div>
+    </div>
+    <div class="model-card">
+      <div class="model-card-img">♦</div>
+      <div class="model-card-overlay">
+        <p class="card-name">Lan Anh</p>
+        <p class="card-meta">25 tuổi · Nha Trang</p>
+        <button class="card-btn" onclick="window.open('landing-page.html','_blank')">Xem hồ sơ</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Lux<em style="font-style:italic;">Date</em></div>
+  <div class="footer-text">© 2025 LuxDate · Premium Companion Services</div>
+  <button class="nav-cta">Liên hệ ngay</button>
+</footer>
+
+<script>
+  // Gallery
+  let current = 0;
+  const slides = document.getElementById('gallerySlides');
+  const dots = document.querySelectorAll('.dot');
+  const count = document.getElementById('photoCount');
+  const total = 4;
+
+  function goSlide(n) {
+    current = (n + total) % total;
+    slides.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    count.textContent = String(current + 1).padStart(2,'0') + ' / ' + String(total).padStart(2,'0');
+  }
+  function changeSlide(dir) { goSlide(current + dir); }
+
+  // Auto advance
+  setInterval(() => changeSlide(1), 5000);
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

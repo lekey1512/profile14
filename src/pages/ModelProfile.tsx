@@ -58,9 +58,9 @@ const cityModels: Record<string, Record<string, ModelData>> = {
       hours: '7PM – 6AM',
       gallery: [
         'https://pbs.twimg.com/media/HCK-MlwaYAAi1lD?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-YaoAAn-jQ?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-baAAEOcgq?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-baIAE1QW1?format=jpg&name=large'
+        'https://pbs.twimg.com/media/HCK-MlsagAAnabz?format=jpg&name=medium',
+        'https://pbs.twimg.com/media/HCK-Mlza8AAwHkD?format=jpg&name=medium',
+        'https://pbs.twimg.com/media/HCK-MlpbUAAXWbq?format=jpg&name=medium'
       ]
     },
     'Hà Mỹ': {
@@ -79,9 +79,9 @@ const cityModels: Record<string, Record<string, ModelData>> = {
       hours: '6PM – 4AM',
       gallery: [
         'https://pbs.twimg.com/media/HCK-V3VakAA1w36?format=jpg&name=medium',
-        'https://pbs.twimg.com/media/HCK99-YaoAAn-jQ?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-baAAEOcgq?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-baIAE1QW1?format=jpg&name=large'
+        'https://pbs.twimg.com/media/HCK-V3ZaYAAtWPt?format=jpg&name=large',
+        'https://pbs.twimg.com/media/HCK-V3bbMAA76K_?format=jpg&name=large',
+        'https://pbs.twimg.com/media/HCK-V3TbcAAZ0No?format=jpg&name=large'
       ]
     },
     'Khánh Huyền': {
@@ -100,9 +100,9 @@ const cityModels: Record<string, Record<string, ModelData>> = {
       hours: '7PM – 6AM',
       gallery: [
         'https://pbs.twimg.com/media/HCK-cgjacAAaftq?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-YaoAAn-jQ?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-baAAEOcgq?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-baIAE1QW1?format=jpg&name=large'
+        'https://pbs.twimg.com/media/HCK-cgnbsAA-7wl?format=jpg&name=large',
+        'https://pbs.twimg.com/media/HCK-cj4a4AABshX?format=jpg&name=large',
+        'https://pbs.twimg.com/media/HCK-cgeaYAAg-1B?format=jpg&name=large'
       ]
     },
     'Mỹ Linh': {
@@ -121,9 +121,9 @@ const cityModels: Record<string, Record<string, ModelData>> = {
       hours: '6PM – 5AM',
       gallery: [
         'https://pbs.twimg.com/media/HCK-kxHbAAEsvWD?format=jpg&name=medium',
-        'https://pbs.twimg.com/media/HCK99-YaoAAn-jQ?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-baAAEOcgq?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-baIAE1QW1?format=jpg&name=large'
+        'https://pbs.twimg.com/media/HCK-kxKaUAAQK3T?format=jpg&name=medium  ',
+        'https://pbs.twimg.com/media/HCK-kxGacAEbhKE?format=jpg&name=large',
+        'https://pbs.twimg.com/media/HCK-kxEbUAEb6mB?format=jpg&name=medium'
       ]
     },
     'Phương Anh': {
@@ -142,9 +142,9 @@ const cityModels: Record<string, Record<string, ModelData>> = {
       hours: '8PM – 4AM',
       gallery: [
         'https://pbs.twimg.com/media/HCK-u7QaAAAnu2v?format=jpg&name=medium',
-        'https://pbs.twimg.com/media/HCK99-YaoAAn-jQ?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-baAAEOcgq?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-baIAE1QW1?format=jpg&name=large'
+        'https://pbs.twimg.com/media/HCK-u7Qa8AEE_c6?format=jpg&name=large',
+        'https://pbs.twimg.com/media/HCK-u7XagAAtFNI?format=jpg&name=medium',
+        'https://pbs.twimg.com/media/HCK-u7WaUAEnB2l?format=jpg&name=large'
       ]
     },
     'Ngọc Trinh': {
@@ -163,9 +163,9 @@ const cityModels: Record<string, Record<string, ModelData>> = {
       hours: '7PM – 5AM',
       gallery: [
         'https://pbs.twimg.com/media/HCK_Ac_boAAcWPI?format=jpg&name=medium',
-        'https://pbs.twimg.com/media/HCK99-YaoAAn-jQ?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-baAAEOcgq?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-baIAE1QW1?format=jpg&name=large'
+        'https://pbs.twimg.com/media/HCK_AdEbEAAXBdG?format=jpg&name=900x900',
+        'https://pbs.twimg.com/media/HCK_AdFaQAEaVWy?format=jpg&name=900x900',
+        'https://pbs.twimg.com/media/HCYyb1VbgAAxLKU?format=jpg&name=large'
       ]
     },
     'Bảo Châu': {
@@ -184,9 +184,9 @@ const cityModels: Record<string, Record<string, ModelData>> = {
       hours: '7PM – 5AM',
       gallery: [
         'https://pbs.twimg.com/media/HCK_oIuagAE2wi6?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-YaoAAn-jQ?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-baAAEOcgq?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-baIAE1QW1?format=jpg&name=large'
+        'https://pbs.twimg.com/media/HCK_oIzboAEw20G?format=jpg&name=large',
+        'https://pbs.twimg.com/media/HCK_oIsa4AA2FP1?format=jpg&name=large',
+        'https://pbs.twimg.com/media/HCK_oIta8AA1SfQ?format=jpg&name=large'
       ]
     },
     'Lan Anh': {
@@ -205,9 +205,9 @@ const cityModels: Record<string, Record<string, ModelData>> = {
       hours: '6PM – 4AM',
       gallery: [
         'https://pbs.twimg.com/media/HCK_4jkbQAA_EI8?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-YaoAAn-jQ?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-baAAEOcgq?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-baIAE1QW1?format=jpg&name=large'
+        'https://pbs.twimg.com/media/HCK_4jraoAAWthp?format=jpg&name=large',
+        'https://pbs.twimg.com/media/HCK_4jbb0AAdqAA?format=jpg&name=medium',
+        'https://pbs.twimg.com/media/HCK_4jdaMAIvVYE?format=jpg&name=medium'
       ]
     }
   },
@@ -228,9 +228,9 @@ const cityModels: Record<string, Record<string, ModelData>> = {
       hours: '7PM – 5AM',
       gallery: [
         'https://pbs.twimg.com/media/HCXQeYlaAAAZlRl?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-YaoAAn-jQ?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-baAAEOcgq?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-baIAE1QW1?format=jpg&name=large'
+        'https://pbs.twimg.com/media/HCLANcNaAAEeOkJ?format=jpg&name=large',
+        'https://pbs.twimg.com/media/HCLANcPaEAAFUu4?format=jpg&name=large',
+        'https://pbs.twimg.com/media/HCLANcQbMAECt8L?format=jpg&name=medium'
       ]
     },
     'Diệu Nhi': {

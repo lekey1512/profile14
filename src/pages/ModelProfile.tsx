@@ -16,6 +16,7 @@ interface ModelData {
   vip: boolean;
   measurements?: string;
   hours?: string;
+  gallery?: string[];
 }
 
 const cityModels: Record<string, Record<string, ModelData>> = {
@@ -33,7 +34,13 @@ const cityModels: Record<string, Record<string, ModelData>> = {
       tags: ['Nhiệt tình', 'Chiều chuộng', 'Đi ăn tối', 'Du lịch', 'Sự kiện'],
       vip: true,
       measurements: '88 – 62 – 90',
-      hours: '6PM – 5AM'
+      hours: '6PM – 5AM',
+      gallery: [
+        'https://pbs.twimg.com/media/HCK99-YaoAAn-jQ?format=jpg&name=large',
+        'https://pbs.twimg.com/media/HCK99-baAAEOcgq?format=jpg&name=large',
+        'https://pbs.twimg.com/media/HCK99-baIAE1QW1?format=jpg&name=large',
+        'https://pbs.twimg.com/media/HCK99-gawAA6HhO?format=jpg&name=large'
+      ]
     },
     'Thùy Tiên': {
       name: 'Thùy Tiên',
@@ -508,24 +515,17 @@ export default function ModelProfile() {
       <section className="profile-hero">
         <div className="profile-gallery-wrap">
           <div className="profile-gallery-slides" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
-            {[1, 2, 3, 4].map((num) => (
-              <div key={num} className="profile-gallery-slide">
-                <div style={{
-                  width: '100%',
-                  height: '100%',
-                  background: `linear-gradient(135deg, #1c${String(num * 5).padStart(2, '0')}10, #0d0d0d)`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <span style={{
-                    fontFamily: "'Playfair Display', serif",
-                    fontSize: '5rem',
-                    color: 'rgba(201, 169, 110, 0.12)'
-                  }}>
-                    {String(num).padStart(2, '0')}
-                  </span>
-                </div>
+            {model?.gallery?.map((image, index) => (
+              <div key={index} className="profile-gallery-slide">
+                <img
+                  src={image}
+                  alt={`${model.name} - Photo ${index + 1}`}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
+                  }}
+                />
               </div>
             ))}
           </div>

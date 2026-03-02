@@ -129,8 +129,10 @@ body {
 .profile-hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 100vh;
-  padding-top: 0;
+  min-height: auto;
+  padding-top: 5.5rem;
+  align-items: start;
+  gap: 0;
 }
 
 /* Gallery */
@@ -138,6 +140,8 @@ body {
   position: relative;
   overflow: hidden;
   background: #0d0d0d;
+  height: 500px;
+  border-right: 1px solid var(--border);
 }
 
 .profile-gallery-slides {
@@ -148,7 +152,7 @@ body {
 
 .profile-gallery-slide {
   min-width: 100%;
-  height: 100vh;
+  height: 500px;
   background: #181818;
   display: flex;
   align-items: center;
@@ -161,14 +165,14 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, transparent 70%, var(--black) 100%), linear-gradient(to top, rgba(8, 8, 8, 0.5) 0%, transparent 40%);
+  background: linear-gradient(to top, rgba(8, 8, 8, 0.4) 0%, transparent 30%);
   pointer-events: none;
 }
 
 /* Gallery nav */
 .profile-gallery-dots {
   position: absolute;
-  bottom: 2rem;
+  bottom: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -223,7 +227,7 @@ body {
 
 .profile-photo-count {
   position: absolute;
-  top: 6rem;
+  top: 1.5rem;
   right: 1.5rem;
   z-index: 10;
   font-size: 0.7rem;
@@ -233,7 +237,7 @@ body {
 
 /* INFO PANEL */
 .profile-info-panel {
-  padding: 7rem 4rem 4rem 5rem;
+  padding: 3rem 4rem 4rem 4rem;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -246,7 +250,7 @@ body {
   content: '';
   position: absolute;
   left: 0;
-  top: 8rem;
+  top: 3rem;
   bottom: 4rem;
   width: 1px;
   background: linear-gradient(to bottom, transparent, var(--pink-main), transparent);
@@ -626,15 +630,18 @@ body {
 @media (max-width: 900px) {
   .profile-hero {
     grid-template-columns: 1fr;
+    padding-top: 4.5rem;
   }
 
   .profile-gallery-wrap {
-    height: 60vh;
-    min-height: 400px;
+    height: 400px;
+    min-height: 350px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
   }
 
   .profile-gallery-slide {
-    height: 60vh;
+    height: 400px;
   }
 
   .profile-info-panel {

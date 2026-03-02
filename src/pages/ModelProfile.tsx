@@ -861,10 +861,10 @@ const cityModels: Record<string, Record<string, ModelData>> = {
       measurements: '85 – 60 – 88',
       hours: '7PM – 5AM',
       gallery: [
-        'https://pbs.twimg.com/media/HCYOQW6bYAAm6og?format=jpg&name=4096x4096',
-        'https://pbs.twimg.com/media/HCK99-YaoAAn-jQ?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-baAAEOcgq?format=jpg&name=large',
-        'https://pbs.twimg.com/media/HCK99-baIAE1QW1?format=jpg&name=large'
+        'https://pbs.twimg.com/media/HCYOuMEawAATMAK?format=jpg&name=4096x4096',
+        'https://pbs.twimg.com/media/HCYOuMMbAAAnBsP?format=jpg&name=4096x4096',
+        'https://pbs.twimg.com/media/HCYOuMVboAASU2r?format=jpg&name=4096x4096',
+        'https://pbs.twimg.com/media/HCYOuMCakAAlB1f?format=jpg&name=4096x4096'
       ]
     },
     'Lan Phương': {
